@@ -442,50 +442,48 @@
             <div class="sidebar-menu">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
+                        <a href="{{route('doctor.dashboard')}}" class="nav-link {{ request()->routeIs('doctor.dashboard') ? 'active' : '' }}">
                             <i class="fas fa-home"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('doctor.appointments.index')}}" class="nav-link {{ request()->routeIs('doctor.appointments.*') ? 'active' : '' }}">
                             <i class="fas fa-calendar-check"></i>
                             <span class="nav-text">Appointments</span>
-                            <span class="badge">5</span>
+                            @php
+                                $pendingAppointments = \App\Models\Appointment::where('status', 'pending')->count();
+                            @endphp
+                            @if($pendingAppointments > 0)
+                                <span class="badge">{{ $pendingAppointments }}</span>
+                            @endif
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('doctor.staff.index')}}" class="nav-link {{ request()->routeIs('doctor.staff.*') ? 'active' : '' }}">
                             <i class="fas fa-users"></i>
                             <span class="nav-text">Staff Management</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-paw"></i>
-                            <span class="nav-text">Pet Records</span>
+                        <a href="{{route('doctor.profile.show')}}" class="nav-link {{ request()->routeIs('doctor.profile.*') ? 'active' : '' }}">
+                            <i class="fas fa-user"></i>
+                            <span class="nav-text">Profile</span>
                         </a>
                     </li>
+                    {{-- <li class="nav-item">
+                        <a href="{{ route('doctor.reports.index') }}" class="nav-link {{ request()->routeIs('doctor.reports.*') ? 'active' : '' }}">
+                            <i class="fas fa-chart-line"></i>
+                            <span class="nav-text">Reports</span>
+                        </a>
+                    </li> --}}
+                </ul>
+            </div>
+            <div style="position: absolute; bottom: 10px; width: 100%;">
+                <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-user-injured"></i>
-                            <span class="nav-text">Patients</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-file-medical"></i>
-                            <span class="nav-text">Medical History</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-cog"></i>
-                            <span class="nav-text">Settings</span>
-                        </a>
-                    </li>
-                    <li class="nav-item mt-4">
-                        <a href="{{ route('auth.logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a href="{{ route('auth.logout') }}" class="nav-link"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fas fa-sign-out-alt"></i>
                             <span class="nav-text">Logout</span>
                         </a>
@@ -524,7 +522,11 @@
                     
                     <div class="user-profile dropdown">
                         <div class="d-flex align-items-center" data-bs-toggle="dropdown">
-                            <img src="{{ asset('imgs/cute.png') }}" alt="User">
+                            @if(Auth::user()->profile_picture)
+                                <img src="{{ Storage::url(Auth::user()->profile_picture) }}" class="rounded-circle" width="40" height="40" alt="Profile Picture">
+                            @else
+                                <img src="{{ asset('imgs/cute.png') }}" class="rounded-circle" width="40" height="40" alt="Default Picture">
+                            @endif
                             <div>
                                 <div class="name">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</div>
                                 <div class="role">Veterinarian</div>

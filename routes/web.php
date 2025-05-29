@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Doctor\AppointmentController;
+use App\Http\Controllers\Doctor\ReportController;
+use App\Http\Controllers\Doctor\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +25,7 @@ Route::get('/register', [\App\Http\Controllers\Auth\AuthController::class, 'show
     ->name('auth.register');
 Route::get('/services', [\App\Http\Controllers\Auth\AuthController::class, 'showServices'])
     ->name('services');
-    
+
 Route::post('/register', [\App\Http\Controllers\Auth\AuthController::class, 'register'])
     ->name('auth.register.submit');
 Route::post('/login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])
@@ -50,8 +53,25 @@ Route::middleware(['auth', 'verified', 'is.staff'])->group(function () {
     })->name('staff.dashboard');
 });
 
-Route::middleware(['auth', 'verified', 'is.doctor'])->group(function () {
-    Route::get('/doctor/dashboard', function () {
-        return view('doctor.dashboard');
-    })->name('doctor.dashboard');
+
+
+
+
+Route::middleware(['auth', 'verified', 'is.doctor'])->prefix('doctor')->name('doctor.')->group(function () {
+    Route::view('/dashboard', 'doctor.dashboard')->name('dashboard');
+
+    Route::resource('appointments', AppointmentController::class);
+    Route::patch('appointments/{id}/status', [AppointmentController::class, 'updateStatus'])->name('appointments.updateStatus');
+
+
+    Route::resource('staff', StaffController::class);
+
+     Route::get('/profile', [\App\Http\Controllers\Doctor\ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [\App\Http\Controllers\Doctor\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [\App\Http\Controllers\Doctor\ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/delete', [\App\Http\Controllers\Doctor\ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    // Route::match(['get', 'post'], '/reports', [ReportController::class, 'index'])->name('reports.index');
+    // Route::get('/reports/export', [ReportController::class, 'exportPDF'])->name('reports.export');
 });

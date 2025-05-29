@@ -46,4 +46,13 @@ class User extends Authenticatable implements MustVerifyEmail
             default => 'client.dashboard',
         };
     }
+    public function appointments()
+    {
+        return $this->hasMany(\app\Models\Appointment::class, 'user_id');
+    }
+
+    public function doctorAppointments()
+    {
+        return $this->hasMany(\app\Models\Appointment::class, 'doctor_id');
+    }
 }
