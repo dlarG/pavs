@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Client\AppointmentController as ClientAppointmentController;
 use App\Http\Controllers\Doctor\AppointmentController;
 use App\Http\Controllers\Doctor\ReportController;
 use App\Http\Controllers\Doctor\StaffController;
@@ -45,6 +46,15 @@ Route::middleware(['auth', 'verified', 'is.client'])->group(function () {
     Route::get('/client/dashboard', function () {
         return view('client.dashboard');
     })->name('client.dashboard');
+
+     Route::get('/appointments', [ClientAppointmentController::class, 'index'])->name('client.appointments.index');
+    Route::get('/appointments/create', [ClientAppointmentController::class, 'create'])->name('client.appointments.create');
+    Route::post('/appointments', [ClientAppointmentController::class, 'store'])->name('client.appointments.store');
+    Route::get('/appointments/{id}', [ClientAppointmentController::class, 'show'])->name('client.appointments.show');
+    Route::get('/appointments/{id}/edit', [ClientAppointmentController::class, 'edit'])->name('client.appointments.edit');
+    Route::put('/appointments/{id}', [ClientAppointmentController::class, 'update'])->name('client.appointments.update');
+    Route::delete('/appointments/{id}', [ClientAppointmentController::class, 'destroy'])->name('client.appointments.destroy');
+    Route::get('/appointments/available-times', [ClientAppointmentController::class, 'getAvailableTimes'])->name('client.appointments.available-times');
 });
 
 Route::middleware(['auth', 'verified', 'is.staff'])->group(function () {
@@ -71,7 +81,8 @@ Route::middleware(['auth', 'verified', 'is.doctor'])->prefix('doctor')->name('do
     Route::post('/profile/update', [\App\Http\Controllers\Doctor\ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile/delete', [\App\Http\Controllers\Doctor\ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
+    Route::get('/appointments/json', [App\Http\Controllers\Doctor\AppointmentController::class, 'allJson']);
+    Route::get('/appointments/day/{date}', [App\Http\Controllers\Doctor\AppointmentController::class, 'appointmentsByDate']);
     // Route::match(['get', 'post'], '/reports', [ReportController::class, 'index'])->name('reports.index');
     // Route::get('/reports/export', [ReportController::class, 'exportPDF'])->name('reports.export');
 });

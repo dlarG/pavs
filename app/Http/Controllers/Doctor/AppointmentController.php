@@ -108,4 +108,28 @@ class AppointmentController extends Controller
         return redirect()->route('doctor.appointments.index')
             ->with('success', 'Appointment deleted successfully.');
     }
+    public function allJson()
+    {
+        $appointments = Appointment::all();
+
+        return $appointments->map(function ($appt) {
+            return [
+                'title' => $appt->pet_name . ' - ' . $appt->service,
+                'start' => $appt->appointment_date,
+            ];
+        });
+    }
+
+    public function appointmentsByDate($date)
+    {
+        $appointments = Appointment::whereDate('appointment_date', $date)->get();
+
+        return response()->json($appointments->map(function ($appt) {
+            return [
+                'pet_name' => $appt->pet_name,
+                'service' => $appt->service,
+                'appointment_time' => \Carbon\Carbon::parse($appt->appointment_time)->format('g:i A'),
+            ];
+        }));
+    }
 }

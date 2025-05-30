@@ -144,6 +144,21 @@
             @endif
         </div>
     </div>
+    <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="calendarModalLabel">Appointment Calendar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id='calendar'></div>
+                <hr>
+                <div id="dayAppointments" class="mt-3"></div>
+            </div>
+            </div>
+        </div>
+    </div>
     <div class="row mt-4">
         @php
             $tomorrow = Carbon::tomorrow()->toDateString();
@@ -157,7 +172,7 @@
             <div class="card-section">
             <div class="section-header">
                 <h3 class="section-title">Upcoming Appointments</h3>
-                <a href="#" class="view-all">View Calendar</a>
+                <a href="#" class="view-all" data-bs-toggle="modal" data-bs-target="#calendarModal">View Calendar</a>
             </div>
             <div class="table-responsive">
                 @if($upcomingAppointments->isEmpty())

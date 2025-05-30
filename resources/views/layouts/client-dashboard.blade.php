@@ -11,6 +11,8 @@
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
 <!-- FullCalendar Script -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #4e73df;
@@ -431,6 +433,386 @@
                 display: none;
             }
         }
+        .dashboard-header {
+        margin-bottom: 30px;
+    }
+    
+    .dashboard-title {
+        font-size: 2.2rem;
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+    
+    .dashboard-subtitle {
+        font-size: 1.1rem;
+        color: #7f8c8d;
+    }
+    
+    /* Stats Cards */
+    .dashboard-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+    
+    .stat-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        color: white;
+        font-size: 24px;
+    }
+    
+    .stat-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        color: #2c3e50;
+    }
+    
+    .stat-content p {
+        font-size: 1.1rem;
+        color: #3498db;
+        font-weight: 500;
+        margin: 0;
+    }
+    
+    /* Services Section */
+    .services-section {
+        margin-bottom: 40px;
+    }
+    
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem;
+        color: #2c3e50;
+    }
+    
+    .section-header p {
+        color: #7f8c8d;
+    }
+    
+    .services-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+    
+    .filter-btn {
+        padding: 8px 20px;
+        border-radius: 20px;
+        background: #ecf0f1;
+        border: none;
+        color: #7f8c8d;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .filter-btn.active, .filter-btn:hover {
+        background: #3498db;
+        color: white;
+    }
+    
+    /* Services Grid */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    
+    .service-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+        border: 1px solid #ecf0f1;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+    
+    .service-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: rgba(52, 152, 219, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: #3498db;
+        font-size: 28px;
+    }
+    
+    .service-card h3 {
+        font-size: 1.3rem;
+        color: #2c3e50;
+        margin-bottom: 12px;
+    }
+    
+    .service-card p {
+        color: #7f8c8d;
+        min-height: 60px;
+        margin-bottom: 20px;
+    }
+    
+    .service-meta {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+        color: #3498db;
+        font-weight: 500;
+    }
+    
+    .btn-book {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        background: #3498db;
+        color: white;
+        border: none;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    
+    .btn-book:hover {
+        background: #2980b9;
+    }
+    
+    /* Upcoming Appointments */
+    .upcoming-appointments {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+    
+    .section-header {
+        margin-bottom: 20px;
+    }
+    
+    .view-all {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .view-all:hover {
+        text-decoration: underline;
+    }
+    
+    .appointment-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .appointment-card {
+        display: flex;
+        border: 1px solid #ecf0f1;
+        border-radius: 12px;
+        padding: 20px;
+        align-items: center;
+    }
+    
+    .appointment-date {
+        width: 70px;
+        height: 70px;
+        background: rgba(52, 152, 219, 0.1);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+    }
+    
+    .date-day {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #3498db;
+    }
+    
+    .date-month {
+        font-size: 0.9rem;
+        color: #3498db;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    
+    .appointment-info {
+        flex: 1;
+    }
+    
+    .appointment-info h3 {
+        font-size: 1.2rem;
+        color: #2c3e50;
+        margin-bottom: 8px;
+    }
+    
+    .appointment-info p {
+        margin-bottom: 5px;
+        color: #7f8c8d;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .appointment-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .btn-action {
+        padding: 8px 15px;
+        border-radius: 8px;
+        background: #ecf0f1;
+        border: none;
+        color: #7f8c8d;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .btn-action:hover {
+        background: #d5dbdb;
+    }
+    
+    .btn-cancel {
+        background: rgba(231, 76, 60, 0.1);
+        color: #e74c3c;
+    }
+    
+    .btn-cancel:hover {
+        background: rgba(231, 76, 60, 0.2);
+    }
+    
+    @media (max-width: 768px) {
+        .appointment-card {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .appointment-date {
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+        
+        .appointment-actions {
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .dashboard-stats {
+            grid-template-columns: 1fr;
+        }
+        
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 20px;
+    }
+    
+    .service-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+        border-top: 4px solid #3a6ea5;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+    
+    .service-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(58, 110, 165, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: #3a6ea5;
+        font-size: 32px;
+    }
+    
+    .service-card h3 {
+        font-size: 1.4rem;
+        color: #343a40;
+        margin-bottom: 12px;
+    }
+    
+    .service-card p {
+        color: #6c757d;
+        min-height: 60px;
+        margin-bottom: 20px;
+    }
+    
+    .btn-book {
+        padding: 12px 25px;
+        border-radius: 50px;
+        background: #3a6ea5;
+        color: white;
+        border: none;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 1rem;
+        width: 100%;
+    }
+    
+    .btn-book:hover {
+        background: #2a5685;
+    }
+    
+    .modal-header {
+        border-radius: 0;
+    }
     </style>
 </head>
 <body>
@@ -439,19 +821,25 @@
         <div class="sidebar">
             <div class="sidebar-header">
                 <img src="{{ asset('imgs/cute.png') }}" alt="PAVS Clinic">
-                <h4>Dr. {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</h4>
-                <p>Veterinarian</p>
+                <h4>Mr/Ms {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</h4>
+                <p>Client</p>
             </div>
             
             <div class="sidebar-menu">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="{{route('doctor.dashboard')}}" class="nav-link {{ request()->routeIs('doctor.dashboard') ? 'active' : '' }}">
+                        <a href="{{route('client.dashboard')}}" class="nav-link {{ request()->routeIs('client.dashboard') ? 'active' : '' }}">
                             <i class="fas fa-home"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{route('client.appointments.index')}}" class="nav-link {{ request()->routeIs('client.appointments.*') ? 'active' : '' }}">
+                            <i class="fas fa-calendar"></i>
+                            <span class="nav-text">Appointments</span>
+                        </a>
+                    </li>
+                    {{-- <li class="nav-item">
                         <a href="{{route('doctor.appointments.index')}}" class="nav-link {{ request()->routeIs('doctor.appointments.*') ? 'active' : '' }}">
                             <i class="fas fa-calendar-check"></i>
                             <span class="nav-text">Appointments</span>
@@ -474,7 +862,7 @@
                             <i class="fas fa-user"></i>
                             <span class="nav-text">Profile</span>
                         </a>
-                    </li>
+                    </li> --}}
                     {{-- <li class="nav-item">
                         <a href="{{ route('doctor.reports.index') }}" class="nav-link {{ request()->routeIs('doctor.reports.*') ? 'active' : '' }}">
                             <i class="fas fa-chart-line"></i>
@@ -515,6 +903,7 @@
                 </div>
                 
                 <div class="nav-icons">
+
                     
                     <div class="user-profile dropdown">
                         <div class="d-flex align-items-center" data-bs-toggle="dropdown">
@@ -525,12 +914,12 @@
                             @endif
                             <div>
                                 <div class="name">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</div>
-                                <div class="role">Veterinarian</div>
+                                <div class="role">Client</div>
                             </div>
                             <i class="fas fa-chevron-down ms-2"></i>
                         </div>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{route('doctor.profile.show')}}"><i class="fas fa-user me-2"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Profile</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
@@ -549,8 +938,51 @@
             </div>
         </div>
     </div>
-
+    <script>
+    $(document).ready(function() {
+        // When doctor or date changes, update available times
+        $('#doctorSelect, #appointmentDate').change(function() {
+            const doctorId = $('#doctorSelect').val();
+            const date = $('#appointmentDate').val();
+            
+            if (doctorId && date) {
+                // Show loading
+                $('#timeSelect').html('<option value="">Loading available times...</option>');
+                
+                // Fetch available times
+                $.ajax({
+                    url: '{{ route("client.appointments.available-times") }}',
+                    method: 'GET',
+                    data: {
+                        doctor_id: doctorId,
+                        date: date
+                    },
+                    success: function(response) {
+                        if (response.length > 0) {
+                            let options = '<option value="">Select Time</option>';
+                            response.forEach(time => {
+                                options += `<option value="${time.time}">${time.formatted}</option>`;
+                            });
+                            $('#timeSelect').html(options);
+                        } else {
+                            $('#timeSelect').html('<option value="">No available times</option>');
+                        }
+                    },
+                    error: function() {
+                        $('#timeSelect').html('<option value="">Error loading times</option>');
+                    }
+                });
+            }
+        });
+        
+        // Trigger change on page load if values are present
+        if ($('#doctorSelect').val() && $('#appointmentDate').val()) {
+            $('#doctorSelect').trigger('change');
+        }
+    });
+</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
         const calendarEl = document.getElementById('calendar');

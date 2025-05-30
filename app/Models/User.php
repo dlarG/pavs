@@ -41,9 +41,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getRedirectRoute()
     {
         return match($this->role) {
-            'staff' => 'staff.dashboard',
-            'doctor' => 'doctor.dashboard',
-            default => 'client.dashboard',
+            'staff' => 'staff/dashboard',
+            'doctor' => 'doctor/dashboard',
+            default => 'client/dashboard',
         };
     }
     public function appointments()
